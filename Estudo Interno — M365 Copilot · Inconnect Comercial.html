@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<!-- saved from url=(0238)file:///C:/Users/DaianeStedile/AppData/Roaming/Claude/local-agent-mode-sessions/2556813e-f04c-405a-97e7-cfa1b94f755f/ddb5f6ed-5af8-499f-bc2e-73fab8ecbe6c/local_1f18b149-d445-424f-8c43-51691218286f/outputs/inconnect-estudo-m365copilot.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudo Interno — M365 Copilot · Inconnect Comercial</title>
+  <link href="./Estudo Interno — M365 Copilot · Inconnect Comercial_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #07080f;
+      --s1:      #0d0e1a;
+      --s2:      #10111f;
+      --card:    #12141e;
+      --border:  rgba(255,255,255,0.07);
+      --text:    #e8eaf2;
+      --muted:   #6b7280;
+      --soft:    #9ca3af;
+      --oa:      #f97316;
+      --ob:      #e83d8c;
+      --oc:      #9333ea;
+      --od:      #0ea5e9;
+      --green:   #22c55e;
+      --red:     #ef4444;
+      --amber:   #f59e0b;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0 0 80px;
+    }
+
+    /* ════ GLOW BLOBS ════ */
+    body::before {
+      content: '';
+      position: fixed; top: -200px; left: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(147,51,234,0.09) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ════ HEADER ════ */
+    .header {
+      background: rgba(7,8,15,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 56px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .h-logo-wrap {
+      padding: 16px 32px 16px 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+    }
+    .h-logo {
+      font-size: 14px; font-weight: 800; letter-spacing: 3px; text-transform: lowercase;
+      background: linear-gradient(90deg, var(--oa), var(--ob), var(--oc), var(--od));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .h-logo-sub { font-size: 8px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .h-center {
+      flex: 1;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .h-badge {
+      padding: 4px 12px; border-radius: 20px; font-size: 8.5px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .badge-red   { background: rgba(239,68,68,0.12); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+    .badge-inner { background: rgba(232,61,140,0.10); color: #f9a8d4; border: 1px solid rgba(232,61,140,0.2); }
+    .h-right {
+      padding: 16px 0 16px 32px;
+      border-left: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ms-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--od); }
+    .ms-txt { font-size: 9px; font-weight: 600; color: var(--muted); letter-spacing: 1px; }
+
+    /* ════ HERO INTERNO ════ */
+    .hero {
+      position: relative; z-index: 1;
+      padding: 52px 56px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .hero-eyebrow {
+      font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ob); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--ob); border-radius: 2px; }
+    .hero-title {
+      font-size: 42px; font-weight: 900; letter-spacing: -1.2px; line-height: 1.07;
+      color: #fff; margin-bottom: 16px;
+    }
+    .hero-title .g {
+      background: linear-gradient(90deg, var(--oa) 0%, var(--ob) 35%, var(--oc) 68%, var(--od) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-desc { font-size: 13.5px; color: var(--soft); line-height: 1.7; max-width: 560px; }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .meta-pill {
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 20px;
+    }
+    .mp-1 { background: rgba(147,51,234,0.12); color: #c4b5fd; border: 1px solid rgba(147,51,234,0.25); }
+    .mp-2 { background: rgba(232,61,140,0.10); color: #f9a8d4; border: 1px solid rgba(232,61,140,0.2); }
+    .mp-3 { background: rgba(249,115,22,0.10); color: #fdba74; border: 1px solid rgba(249,115,22,0.2); }
+
+    /* ════ GRAD LINE ════ */
+    .grad-line {
+      height: 2px; margin: 0 56px;
+      background: linear-gradient(90deg, transparent, var(--oa), var(--ob), var(--oc), var(--od), transparent);
+      opacity: 0.4; border-radius: 2px;
+    }
+
+    /* ════ SECTION TEMPLATE ════ */
+    .section {
+      position: relative; z-index: 1;
+      padding: 48px 56px 0;
+    }
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .sec-num {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; color: #fff;
+      flex-shrink: 0;
+    }
+    .n1 { background: linear-gradient(135deg, var(--oc), var(--od)); }
+    .n2 { background: linear-gradient(135deg, var(--ob), var(--oc)); }
+    .n3 { background: linear-gradient(135deg, var(--oa), var(--ob)); }
+    .n4 { background: linear-gradient(135deg, #16a34a, #0ea5e9); }
+    .n5 { background: linear-gradient(135deg, var(--amber), var(--oa)); }
+    .n6 { background: linear-gradient(135deg, var(--red), var(--ob)); }
+
+    .sec-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+    .sec-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; font-weight: 400; }
+
+    /* ════ SEC 1: Ecossistema ════ */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .eco-card {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      overflow: hidden;
+    }
+    .eco-strip { height: 3px; }
+    .ec-1 .eco-strip { background: linear-gradient(90deg, var(--oc), var(--od)); }
+    .ec-2 .eco-strip { background: linear-gradient(90deg, var(--ob), var(--oc)); }
+    .ec-3 .eco-strip { background: linear-gradient(90deg, var(--oa), var(--ob)); }
+
+    .eco-inner { padding: 20px; }
+    .eco-num { font-size: 8px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .ec-1 .eco-num { color: #a78bfa; }
+    .ec-2 .eco-num { color: #f472b6; }
+    .ec-3 .eco-num { color: #fb923c; }
+
+    .eco-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .eco-tag { font-size: 10px; color: var(--muted); font-style: italic; margin-bottom: 14px; }
+    .eco-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .eco-icon-s { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+    .eco-desc { font-size: 11px; color: var(--soft); line-height: 1.5; }
+    .eco-desc strong { color: var(--text); font-weight: 600; }
+
+    .eco-pricing {
+      margin-top: 16px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+    .eco-price-label { font-size: 7.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .eco-price-val { font-size: 11px; color: var(--soft); line-height: 1.4; }
+
+    /* ════ SEC 2: Qualificação ════ */
+    .qual-table {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .qt-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--border);
+    }
+    .qt-th {
+      padding: 12px 16px;
+      font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .qt-th:not(:first-child) { text-align: center; border-left: 1px solid var(--border); }
+    .qt-th.t1 { color: #a78bfa; }
+    .qt-th.t2 { color: #f472b6; }
+    .qt-th.t3 { color: #fb923c; }
+
+    .qt-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+    .qt-row:hover { background: rgba(255,255,255,0.02); }
+    .qt-row:first-child { border-top: none; }
+
+    .qt-q {
+      padding: 13px 16px;
+      font-size: 12px; color: var(--soft); line-height: 1.45;
+    }
+    .qt-q strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; font-size: 12px; }
+
+    .qt-cell {
+      padding: 13px 8px;
+      text-align: center;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      border-left: 1px solid var(--border);
+    }
+
+    /* ════ SEC 3: Argumentos ════ */
+    .args-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .arg-card {
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .arg-strip { height: 3px; }
+    .a1 .arg-strip { background: linear-gradient(90deg, var(--oc), var(--od)); }
+    .a2 .arg-strip { background: linear-gradient(90deg, var(--ob), var(--oc)); }
+    .a3 .arg-strip { background: linear-gradient(90deg, var(--oa), var(--ob)); }
+
+    .arg-inner { padding: 18px 18px 20px; }
+    .arg-prod-num { font-size: 8px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 3px; }
+    .a1 .arg-prod-num { color: #a78bfa; }
+    .a2 .arg-prod-num { color: #f472b6; }
+    .a3 .arg-prod-num { color: #fb923c; }
+    .arg-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+
+    .arg-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .arg-item:last-child { margin-bottom: 0; }
+    .arg-head { font-size: 10.5px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .arg-body { font-size: 10px; color: var(--soft); line-height: 1.5; }
+
+    /* ════ SEC 4: ROI ════ */
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .roi-card {
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .roi-num {
+      font-size: 36px; font-weight: 900; line-height: 1; margin-bottom: 6px;
+      background: linear-gradient(90deg, var(--oa), var(--ob), var(--oc), var(--od));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .roi-label { font-size: 11px; color: var(--muted); line-height: 1.45; }
+    .roi-source { font-size: 8.5px; color: rgba(107,114,128,0.6); margin-top: 6px; font-style: italic; }
+
+    .roi-cases {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .roi-case {
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+    }
+    .case-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .case-title { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .case-body { font-size: 11px; color: var(--soft); line-height: 1.55; }
+    .case-body strong { color: var(--text); font-weight: 600; }
+
+    /* ════ SEC 5: Objeções ════ */
+    .obj-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .obj {
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      overflow: hidden;
+    }
+    .obj-num {
+      width: 48px;
+      background: rgba(255,255,255,0.03);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900;
+      border-right: 1px solid var(--border);
+      color: rgba(255,255,255,0.1);
+    }
+    .obj-q {
+      padding: 16px 18px;
+      border-right: 1px solid var(--border);
+    }
+    .obj-q-label { font-size: 7.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #fca5a5; margin-bottom: 5px; }
+    .obj-q-text { font-size: 12.5px; color: var(--text); font-weight: 600; line-height: 1.4; font-style: italic; }
+    .obj-a { padding: 16px 18px; background: rgba(34,197,94,0.03); }
+    .obj-a-label { font-size: 7.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #86efac; margin-bottom: 5px; }
+    .obj-a-text { font-size: 12px; color: var(--soft); line-height: 1.55; }
+    .obj-a-text strong { color: var(--text); font-weight: 600; }
+
+    /* ════ SEC 6: Caminho de Adoção ════ */
+    .adoption {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .adop-step {
+      padding: 20px 16px;
+      background: var(--card);
+      position: relative;
+      text-align: center;
+    }
+    .adop-step + .adop-step {
+      border-left: 1px solid var(--border);
+    }
+    .adop-step::after {
+      content: '›';
+      position: absolute;
+      right: -10px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--muted);
+      z-index: 2;
+    }
+    .adop-step:last-child::after { display: none; }
+
+    .adop-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #fff;
+      margin: 0 auto 10px;
+    }
+    .an1 { background: linear-gradient(135deg, var(--oc), var(--od)); }
+    .an2 { background: linear-gradient(135deg, var(--ob), var(--oc)); }
+    .an3 { background: linear-gradient(135deg, var(--oa), var(--ob)); }
+    .an4 { background: linear-gradient(135deg, #16a34a, var(--od)); }
+    .an5 { background: linear-gradient(135deg, var(--amber), var(--oa)); }
+
+    .adop-icon { font-size: 22px; margin-bottom: 8px; }
+    .adop-title { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 5px; line-height: 1.3; }
+    .adop-desc { font-size: 10px; color: var(--muted); line-height: 1.45; }
+
+    /* ════ FOOTER ════ */
+    .page-footer {
+      position: relative; z-index: 1;
+      margin: 48px 56px 0;
+      padding: 20px 28px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(147,51,234,0.08), rgba(14,165,233,0.06));
+      border: 1px solid rgba(147,51,234,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pf-left { display: flex; flex-direction: column; gap: 3px; }
+    .pf-logo { font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: lowercase;
+      background: linear-gradient(90deg, var(--oa), var(--ob), var(--oc), var(--od));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .pf-sub { font-size: 9px; color: var(--muted); letter-spacing: 1px; font-weight: 500; }
+    .pf-disclaimer { font-size: 9px; color: rgba(107,114,128,0.5); max-width: 400px; line-height: 1.5; font-style: italic; text-align: right; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #2a2d3e; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ───────────────── HEADER ───────────────── -->
+<header class="header">
+  <div class="h-logo-wrap">
+    <div class="h-logo">inconnect</div>
+    <div class="h-logo-sub">Uso Interno · Comercial</div>
+  </div>
+  <div class="h-center">
+    <span class="h-badge badge-red">🔒 Confidencial</span>
+    <span class="h-badge badge-inner">📚 Material de Estudo</span>
+  </div>
+  <div class="h-right">
+    <div class="ms-dot"></div>
+    <div class="ms-txt">Parceiro Microsoft</div>
+  </div>
+</header>
+
+<!-- ───────────────── HERO ───────────────── -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Guia Comercial Completo</div>
+    <h1 class="hero-title">
+      Ecossistema<br>
+      <span class="g">Microsoft AI</span><br>
+      como vender
+    </h1>
+    <p class="hero-desc">
+      Tudo que o time comercial precisa saber: qual produto vender para qual cliente, como qualificar, como responder objeções e quais dados de ROI usar na conversa.
+    </p>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-pill mp-1">🤖 M365 Copilot</div>
+    <div class="meta-pill mp-2">🎛️ Copilot Studio</div>
+    <div class="meta-pill mp-3">⚡ Azure AI Foundry</div>
+  </div>
+</section>
+
+<div class="grad-line"></div>
+
+<!-- ═══════════════════════════════════════════
+     SEÇÃO 1: Ecossistema Completo
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-header">
+    <div class="sec-num n1">1</div>
+    <div>
+      <div class="sec-title">O Ecossistema — O que cada produto entrega</div>
+      <div class="sec-sub">Entenda o posicionamento, o público e o contexto de licenciamento de cada plataforma</div>
+    </div>
+  </div>
+
+  <div class="ecosystem-grid">
+
+    <!-- M365 Copilot -->
+    <div class="eco-card ec-1">
+      <div class="eco-strip"></div>
+      <div class="eco-inner">
+        <div class="eco-num">Produto 01</div>
+        <div class="eco-name">Microsoft 365 Copilot</div>
+        <div class="eco-tag">IA embarcada no dia a dia</div>
+
+        <div class="eco-row">
+          <div class="eco-icon-s">🎯</div>
+          <div class="eco-desc"><strong>Para quem é:</strong> Toda empresa que já usa M365 (Outlook, Teams, Word, Excel) e quer produtividade imediata sem projeto técnico.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">⚙️</div>
+          <div class="eco-desc"><strong>O que faz:</strong> Resume reuniões, redigí e-mails, analisa documentos, gera rascunhos, pesquisa informações nos dados da empresa via Microsoft Graph.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">🔗</div>
+          <div class="eco-desc"><strong>Integração-chave:</strong> Microsoft Graph — vê os e-mails, arquivos e reuniões do usuário de forma segura e contextual.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">🛡️</div>
+          <div class="eco-desc"><strong>Segurança:</strong> Não usa dados do cliente para treinar modelos. Privacidade do Microsoft 365 mantida.</div>
+        </div>
+
+        <div class="eco-pricing">
+          <div class="eco-price-label">Licenciamento</div>
+          <div class="eco-price-val">M365 E3/E5 + Copilot for M365<br>~USD 30/usuário/mês (adicional)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copilot Studio -->
+    <div class="eco-card ec-2">
+      <div class="eco-strip"></div>
+      <div class="eco-inner">
+        <div class="eco-num">Produto 02</div>
+        <div class="eco-name">Copilot Studio</div>
+        <div class="eco-tag">Construtor de agentes low-code</div>
+
+        <div class="eco-row">
+          <div class="eco-icon-s">🎯</div>
+          <div class="eco-desc"><strong>Para quem é:</strong> Empresas que querem um chatbot/agente especializado — RH, atendimento ao cliente, TI — sem time de dev robusto.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">⚙️</div>
+          <div class="eco-desc"><strong>O que faz:</strong> Interface drag-and-drop para criar agentes que respondem perguntas, executam fluxos e integram dados via conectores.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">🔗</div>
+          <div class="eco-desc"><strong>Integração-chave:</strong> Power Platform, SharePoint, Dataverse, Teams — e pode ser publicado em canais externos.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">📊</div>
+          <div class="eco-desc"><strong>Diferencial:</strong> Pode ser estendido sobre o M365 Copilot (habilidades adicionais) ou rodar de forma completamente independente.</div>
+        </div>
+
+        <div class="eco-pricing">
+          <div class="eco-price-label">Licenciamento</div>
+          <div class="eco-price-val">Modelo por mensagens (tokens)<br>Incluso no M365 Copilot com limites</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Azure AI Foundry -->
+    <div class="eco-card ec-3">
+      <div class="eco-strip"></div>
+      <div class="eco-inner">
+        <div class="eco-num">Produto 03</div>
+        <div class="eco-name">Azure AI Foundry</div>
+        <div class="eco-tag">Plataforma enterprise de IA em escala</div>
+
+        <div class="eco-row">
+          <div class="eco-icon-s">🎯</div>
+          <div class="eco-desc"><strong>Para quem é:</strong> Empresas com time técnico (dev/dados) que precisam de controle total, fine-tuning de modelos e integração com sistemas legados.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">⚙️</div>
+          <div class="eco-desc"><strong>O que faz:</strong> Catálogo de modelos (OpenAI, Llama, Mistral…), avaliação, CI/CD de IA, orquestração de agentes com observabilidade e governança.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">🔗</div>
+          <div class="eco-desc"><strong>Integração-chave:</strong> Todo o Azure — rede virtual, Key Vault, Monitor, RBAC, DevOps. Permite RAG com dados proprietários.</div>
+        </div>
+        <div class="eco-row">
+          <div class="eco-icon-s">🏗️</div>
+          <div class="eco-desc"><strong>Diferencial:</strong> Escolha e troca livre de modelos fundacionais. Ideal para ISVs e empresas com dados altamente sensíveis.</div>
+        </div>
+
+        <div class="eco-pricing">
+          <div class="eco-price-label">Licenciamento</div>
+          <div class="eco-price-val">Consumo Azure (pay-as-you-go)<br>Custos variáveis por modelo e volume</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SEÇÃO 2: Qualificação do Cliente
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-header">
+    <div class="sec-num n2">2</div>
+    <div>
+      <div class="sec-title">Qualificação — As perguntas certas na hora certa</div>
+      <div class="sec-sub">Use estas perguntas para descobrir em qual produto o cliente se encaixa antes de apresentar qualquer proposta</div>
+    </div>
+  </div>
+
+  <div class="qual-table">
+    <div class="qt-header">
+      <div class="qt-th" style="color: var(--muted);">Pergunta de Qualificação</div>
+      <div class="qt-th t1">M365 Copilot</div>
+      <div class="qt-th t2">Copilot Studio</div>
+      <div class="qt-th t3">Azure Foundry</div>
+    </div>
+
+    <div class="qt-row">
+      <div class="qt-q"><strong>Usa Microsoft 365 hoje?</strong> E-mail no Outlook, reuniões no Teams, arquivos no SharePoint/OneDrive?</div>
+      <div class="qt-cell">✅</div>
+      <div class="qt-cell">⚠️</div>
+      <div class="qt-cell">➖</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>Tem uma dor específica de processo</strong> que quer automatizar com IA? (ex: onboarding, atendimento, helpdesk)</div>
+      <div class="qt-cell">⚠️</div>
+      <div class="qt-cell">✅</div>
+      <div class="qt-cell">⚠️</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>Tem time de TI / desenvolvedores</strong> disponíveis para construir e manter soluções de IA?</div>
+      <div class="qt-cell">➖</div>
+      <div class="qt-cell">⚠️</div>
+      <div class="qt-cell">✅</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>Tem dados proprietários sensíveis</strong> (financeiros, médicos, jurídicos) que precisam de controle total?</div>
+      <div class="qt-cell">➖</div>
+      <div class="qt-cell">➖</div>
+      <div class="qt-cell">✅</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>A empresa é uma ISV ou software house</strong> que quer embutir IA em produtos próprios?</div>
+      <div class="qt-cell">➖</div>
+      <div class="qt-cell">⚠️</div>
+      <div class="qt-cell">✅</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>Quanto tempo o time passa</strong> em tarefas repetitivas como resumos, e-mails, relatórios?</div>
+      <div class="qt-cell">✅</div>
+      <div class="qt-cell">⚠️</div>
+      <div class="qt-cell">➖</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>Quer publicar um assistente IA</strong> para seus próprios clientes finais (portal, site, app)?</div>
+      <div class="qt-cell">➖</div>
+      <div class="qt-cell">✅</div>
+      <div class="qt-cell">⚠️</div>
+    </div>
+    <div class="qt-row">
+      <div class="qt-q"><strong>Qual o nível de maturidade digital?</strong> Já adotaram M365 bem? Têm Power Platform? Têm Azure?</div>
+      <div class="qt-cell">M365</div>
+      <div class="qt-cell">Power Platform</div>
+      <div class="qt-cell">Azure</div>
+    </div>
+
+  </div>
+  <p style="font-size: 10px; color: var(--muted); margin-top: 10px; padding-left: 4px; font-style: italic;">
+    ✅ Sinal forte para esse produto &nbsp;·&nbsp; ⚠️ Pode se encaixar com contexto &nbsp;·&nbsp; ➖ Provavelmente não é esse produto
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SEÇÃO 3: Argumentos de Venda
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-header">
+    <div class="sec-num n3">3</div>
+    <div>
+      <div class="sec-title">Argumentos — O que falar para cada perfil</div>
+      <div class="sec-sub">Use estas narrativas para conectar o produto à dor real do cliente, não à feature técnica</div>
+    </div>
+  </div>
+
+  <div class="args-grid">
+
+    <div class="arg-card a1">
+      <div class="arg-strip"></div>
+      <div class="arg-inner">
+        <div class="arg-prod-num">M365 Copilot</div>
+        <div class="arg-title">🤖 Para decisores e RH</div>
+
+        <div class="arg-item">
+          <div class="arg-head">Argumento da produtividade</div>
+          <div class="arg-body">"Seu time passa horas por semana lendo e-mails, resumindo reuniões e montando relatórios. O Copilot faz isso em segundos — sem mudar os apps que eles já usam."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da adoção</div>
+          <div class="arg-body">"Não é uma nova ferramenta para aprender. É o Outlook, o Teams e o Excel que seu time já conhece — com IA dentro."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da segurança</div>
+          <div class="arg-body">"Seus dados nunca saem do ambiente Microsoft. Não treinam modelos de terceiros. Mesma segurança do M365 que vocês já têm."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento do ROI rápido</div>
+          <div class="arg-body">"A maioria das empresas vê retorno em menos de 90 dias — antes mesmo da segunda parcela do projeto."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arg-card a2">
+      <div class="arg-strip"></div>
+      <div class="arg-inner">
+        <div class="arg-prod-num">Copilot Studio</div>
+        <div class="arg-title">🎛️ Para operações e TI</div>
+
+        <div class="arg-item">
+          <div class="arg-head">Argumento da automação inteligente</div>
+          <div class="arg-body">"Seu helpdesk responde as mesmas 50 perguntas todo dia. Com um agente no Studio, isso vira automático — e sua equipe foca no que realmente importa."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da personalização</div>
+          <div class="arg-body">"Diferente de um chatbot genérico, o agente é alimentado pelos dados da sua empresa — política interna, catálogo, histórico."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da velocidade</div>
+          <div class="arg-body">"Com a Inconnect, um agente funcional sai em semanas, não meses. Plataforma low-code significa menos risco técnico e entrega mais rápida."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da escalabilidade</div>
+          <div class="arg-body">"Começa com um agente interno. Depois publica para clientes. A mesma plataforma cresce com a estratégia de IA da empresa."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arg-card a3">
+      <div class="arg-strip"></div>
+      <div class="arg-inner">
+        <div class="arg-prod-num">Azure AI Foundry</div>
+        <div class="arg-title">⚡ Para líderes técnicos e CIOs</div>
+
+        <div class="arg-item">
+          <div class="arg-head">Argumento do controle total</div>
+          <div class="arg-body">"Você escolhe o modelo. Você define onde os dados ficam. Você controla a rede, o acesso e o monitoramento. Nenhum vendor lock-in forçado."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da governança</div>
+          <div class="arg-body">"Para setores regulados (financeiro, saúde, jurídico), Foundry oferece auditoria completa, RBAC granular e integração com Azure Policy."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento da inovação</div>
+          <div class="arg-body">"Não precisa ficar preso ao OpenAI. Foundry tem GPT-4, Llama, Mistral e outros. Troca modelo conforme o caso de uso ou custo."</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-head">Argumento do ecossistema</div>
+          <div class="arg-body">"Já usam Azure? A Inconnect integra Foundry com seus workloads existentes — banco de dados, API Management, pipelines de dados."</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SEÇÃO 4: Dados de ROI e Impacto
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-header">
+    <div class="sec-num n4">4</div>
+    <div>
+      <div class="sec-title">ROI &amp; Impacto — Números para usar na conversa</div>
+      <div class="sec-sub">Dados de mercado e estudos Microsoft para reforçar o argumento comercial</div>
+    </div>
+  </div>
+
+  <div class="roi-grid">
+    <div class="roi-card">
+      <div class="roi-num">70%</div>
+      <div class="roi-label">dos usuários de Copilot relatam maior produtividade no trabalho diário</div>
+      <div class="roi-source">Microsoft Work Trend Index, 2024</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">2h</div>
+      <div class="roi-label">economizadas por semana por funcionário usando Copilot regularmente</div>
+      <div class="roi-source">Microsoft Work Trend Index, 2024</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">77%</div>
+      <div class="roi-label">das empresas Fortune 500 já adotaram o Microsoft 365 Copilot</div>
+      <div class="roi-source">Microsoft FY25 Q2 Earnings, 2025</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">14min</div>
+      <div class="roi-label">economizados por reunião com resumos automáticos do Copilot no Teams</div>
+      <div class="roi-source">Harvard Business Review + Microsoft, 2024</div>
+    </div>
+  </div>
+
+  <div class="roi-cases">
+    <div class="roi-case">
+      <div class="case-icon">🏦</div>
+      <div>
+        <div class="case-title">Caso: Setor Financeiro</div>
+        <div class="case-body">Analistas que usam Copilot no Excel e no Teams <strong>reduzem em até 40% o tempo</strong> de preparação de relatórios mensais. A leitura de documentos de due diligence caiu de horas para minutos com resumos contextuais.</div>
+      </div>
+    </div>
+    <div class="roi-case">
+      <div class="case-icon">🏥</div>
+      <div>
+        <div class="case-title">Caso: Saúde e RH</div>
+        <div class="case-body">Agentes criados no Copilot Studio para onboarding de novos colaboradores <strong>reduziram 60% das chamadas ao RH</strong> — o agente responde políticas, benefícios e documentação automaticamente, 24/7.</div>
+      </div>
+    </div>
+    <div class="roi-case">
+      <div class="case-icon">🏭</div>
+      <div>
+        <div class="case-title">Caso: Indústria e Manufatura</div>
+        <div class="case-body">Azure AI Foundry permite treinar modelos customizados com dados de manutenção preditiva. Empresas relatam <strong>redução de 30% em paradas não planejadas</strong> com IA embarcada em sistemas MES.</div>
+      </div>
+    </div>
+    <div class="roi-case">
+      <div class="case-icon">⚖️</div>
+      <div>
+        <div class="case-title">Caso: Escritórios Jurídicos</div>
+        <div class="case-body">Revisão de contratos que levava 3-4h com Copilot no Word <strong>cai para 20-30 minutos</strong>. O advogado valida — não redige. Firmas relatam aumento de 25% na capacidade de atendimento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SEÇÃO 5: Objeções Comuns
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-header">
+    <div class="sec-num n5">5</div>
+    <div>
+      <div class="sec-title">Objeções — Como responder com confiança</div>
+      <div class="sec-sub">As 6 objeções mais comuns no ciclo de venda de IA Microsoft e como transformá-las em avanço</div>
+    </div>
+  </div>
+
+  <div class="obj-list">
+
+    <div class="obj">
+      <div class="obj-num">01</div>
+      <div class="obj-q">
+        <div class="obj-q-label">Objeção</div>
+        <div class="obj-q-text">"Está caro. R$150+ por usuário por mês é muito."</div>
+      </div>
+      <div class="obj-a">
+        <div class="obj-a-label">Como responder</div>
+        <div class="obj-a-text">"Quanto custa uma hora do seu colaborador? <strong>A Microsoft calcula que o Copilot economiza ~2h/semana</strong>, ou seja, ~8h/mês por pessoa. Para a maioria dos perfis, o ROI positivo aparece no primeiro mês." Ajude o cliente a fazer a conta com o salário médio da equipe.</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-num">02</div>
+      <div class="obj-q">
+        <div class="obj-q-label">Objeção</div>
+        <div class="obj-q-text">"Tenho medo de segurança. Meus dados vão para a IA?"</div>
+      </div>
+      <div class="obj-a">
+        <div class="obj-a-label">Como responder</div>
+        <div class="obj-a-text">"O Microsoft 365 Copilot <strong>não usa seus dados para treinar modelos</strong>. Tudo fica dentro do seu tenant Microsoft, com as mesmas políticas de segurança que você já aplica ao M365. É auditável, reversível e controlado pelo seu admin."</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-num">03</div>
+      <div class="obj-q">
+        <div class="obj-q-label">Objeção</div>
+        <div class="obj-q-text">"Meu time não vai usar. São resistentes a tecnologia."</div>
+      </div>
+      <div class="obj-a">
+        <div class="obj-a-label">Como responder</div>
+        <div class="obj-a-text">"É exatamente por isso que a Inconnect inclui <strong>workshops de adoção e treinamento</strong>. A resistência não é a tecnologia — é a mudança de hábito. Nosso processo de adoção resolve isso com cases práticos para o contexto deles, não genéricos."</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-num">04</div>
+      <div class="obj-q">
+        <div class="obj-q-label">Objeção</div>
+        <div class="obj-q-text">"Já usamos ChatGPT. Por que mudar?"</div>
+      </div>
+      <div class="obj-a">
+        <div class="obj-a-label">Como responder</div>
+        <div class="obj-a-text">"ChatGPT não tem acesso aos seus e-mails, reuniões e arquivos internos. O Copilot sim — graças ao Microsoft Graph. <strong>É como ter um assistente que realmente conhece seu trabalho</strong>, não apenas responde perguntas genéricas. E com segurança corporativa."</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-num">05</div>
+      <div class="obj-q">
+        <div class="obj-q-label">Objeção</div>
+        <div class="obj-q-text">"Precisamos primeiro organizar nossos dados, não estamos prontos."</div>
+      </div>
+      <div class="obj-a">
+        <div class="obj-a-label">Como responder</div>
+        <div class="obj-a-text">"Perfeito — a Inconnect faz a avaliação de maturidade digital antes de qualquer implementação. <strong>Em muitos casos, o Copilot funciona bem com o que você tem hoje</strong>, e identifica o que organizar para maximizar os resultados. É uma evolução, não um pré-requisito."</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-num">06</div>
+      <div class="obj-q">
+        <div class="obj-q-label">Objeção</div>
+        <div class="obj-q-text">"Vou esperar a tecnologia amadurecer mais."</div>
+      </div>
+      <div class="obj-a">
+        <div class="obj-a-label">Como responder</div>
+        <div class="obj-a-text">"Com 77% das Fortune 500 já usando, a tecnologia está madura. <strong>O risco real é o concorrente que não esperou</strong>. Cada mês de atraso é produtividade perdida e curva de aprendizado acumulada que fica para trás. Começar agora é uma vantagem competitiva."</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SEÇÃO 6: Caminho de Adoção
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-header">
+    <div class="sec-num n6">6</div>
+    <div>
+      <div class="sec-title">Caminho de Adoção — Como a Inconnect conduz a jornada</div>
+      <div class="sec-sub">Do diagnóstico à expansão — o processo que reduz riscos e acelera resultados</div>
+    </div>
+  </div>
+
+  <div class="adoption">
+    <div class="adop-step">
+      <div class="adop-num an1">1</div>
+      <div class="adop-icon">🔍</div>
+      <div class="adop-title">Diagnóstico de Maturidade</div>
+      <div class="adop-desc">Avaliamos o ambiente M365, licenças, dados e nível de adoção atual do time</div>
+    </div>
+    <div class="adop-step">
+      <div class="adop-num an2">2</div>
+      <div class="adop-icon">🗺️</div>
+      <div class="adop-title">Roadmap Personalizado</div>
+      <div class="adop-desc">Definimos qual produto começa, quais times prioritários e metas de 30/60/90 dias</div>
+    </div>
+    <div class="adop-step">
+      <div class="adop-num an3">3</div>
+      <div class="adop-icon">⚙️</div>
+      <div class="adop-title">Implementação Técnica</div>
+      <div class="adop-desc">Configuração, segurança, integrações e deploy com melhores práticas Microsoft</div>
+    </div>
+    <div class="adop-step">
+      <div class="adop-num an4">4</div>
+      <div class="adop-icon">🎓</div>
+      <div class="adop-title">Treinamento &amp; Adoção</div>
+      <div class="adop-desc">Workshops práticos por função — o time aprende com casos do próprio trabalho</div>
+    </div>
+    <div class="adop-step">
+      <div class="adop-num an5">5</div>
+      <div class="adop-icon">📈</div>
+      <div class="adop-title">Expansão &amp; Suporte</div>
+      <div class="adop-desc">Medição de ROI, novos casos de uso e evolução para Copilot Studio ou Foundry</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ───────────────── FOOTER ───────────────── -->
+<footer class="page-footer">
+  <div class="pf-left">
+    <div class="pf-logo">inconnect</div>
+    <div class="pf-sub">Transformação Digital Humanizada · Parceiro Microsoft</div>
+  </div>
+  <div class="pf-disclaimer">
+    * Dados baseados em estudos Microsoft Work Trend Index 2024, Microsoft FY25 Q2 Earnings e relatórios de parceiros. Material para uso interno do time comercial Inconnect. Não distribuir externamente.
+  </div>
+</footer>
+
+
+
+</body></html>

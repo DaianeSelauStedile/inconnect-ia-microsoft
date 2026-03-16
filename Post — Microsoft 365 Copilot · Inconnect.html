@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!-- saved from url=(0236)file:///C:/Users/DaianeStedile/AppData/Roaming/Claude/local-agent-mode-sessions/2556813e-f04c-405a-97e7-cfa1b94f755f/ddb5f6ed-5af8-499f-bc2e-73fab8ecbe6c/local_1f18b149-d445-424f-8c43-51691218286f/outputs/inconnect-post-m365copilot.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — Microsoft 365 Copilot · Inconnect</title>
+  <link href="./Post — Microsoft 365 Copilot · Inconnect_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── Card principal (800×1080 — proporção Instagram/LinkedIn portrait) ── */
+    .card {
+      width: 800px;
+      background: #07080f;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Glow de fundo ── */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(147,51,234,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ════ TOPO ════ */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 36px 0;
+    }
+    .logo {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: lowercase;
+      background: linear-gradient(90deg, #f97316, #e83d8c, #9333ea, #0ea5e9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ms-pill {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #6b7280;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ════ HERO ════ */
+    .hero {
+      padding: 36px 36px 28px;
+      text-align: center;
+      position: relative;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e83d8c;
+      background: rgba(232,61,140,0.08);
+      border: 1px solid rgba(232,61,140,0.25);
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .eyebrow::before, .eyebrow::after {
+      content: '—';
+      opacity: 0.5;
+    }
+
+    .hero-title {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .hero-title .grad {
+      background: linear-gradient(90deg, #f97316 0%, #e83d8c 40%, #9333ea 70%, #0ea5e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Linha gradiente ─────────────────────── */
+    .divider {
+      height: 1px;
+      margin: 0 36px;
+      background: linear-gradient(90deg, transparent, #f97316, #e83d8c, #9333ea, #0ea5e9, transparent);
+      opacity: 0.4;
+    }
+
+    /* ════ PRODUTOS ════ */
+    .products {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      padding: 28px 28px 0;
+    }
+
+    .prod {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: #0e1017;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .prod-strip {
+      height: 3px;
+    }
+    .prod-1 .prod-strip { background: linear-gradient(90deg, #9333ea, #0ea5e9); }
+    .prod-2 .prod-strip { background: linear-gradient(90deg, #e83d8c, #9333ea); }
+    .prod-3 .prod-strip { background: linear-gradient(90deg, #f97316, #e83d8c); }
+
+    .prod-inner { padding: 18px 16px 20px; }
+
+    .prod-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .prod-1 .prod-icon { background: rgba(147,51,234,0.15); border: 1px solid rgba(147,51,234,0.25); }
+    .prod-2 .prod-icon { background: rgba(232,61,140,0.15); border: 1px solid rgba(232,61,140,0.25); }
+    .prod-3 .prod-icon { background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.25); }
+
+    .prod-num {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .prod-1 .prod-num { color: #a78bfa; }
+    .prod-2 .prod-num { color: #f472b6; }
+    .prod-3 .prod-num { color: #fb923c; }
+
+    .prod-name {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f0f0f5;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .prod-tagline {
+      font-size: 9.5px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .prod-label {
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .prod-1 .prod-label { color: #a78bfa; }
+    .prod-2 .prod-label { color: #f472b6; }
+    .prod-3 .prod-label { color: #fb923c; }
+
+    .prod-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .prod-list li {
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: #9ca3af;
+      padding-left: 14px;
+      position: relative;
+    }
+    .prod-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-size: 8px;
+      opacity: 0.5;
+    }
+    .prod-list li strong {
+      color: #d1d5db;
+      font-weight: 600;
+    }
+
+    /* ════ STATS BAND ════ */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+      margin: 28px 28px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat {
+      padding: 16px 12px;
+      text-align: center;
+      background: #0e1017;
+    }
+    .stat + .stat { border-left: 1px solid rgba(255,255,255,0.06); }
+
+    .stat-num {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 5px;
+      background: linear-gradient(90deg, #f97316, #e83d8c, #9333ea, #0ea5e9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-size: 9px;
+      color: #6b7280;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* ════ PERGUNTA ÂNCORA ════ */
+    .anchor {
+      margin: 24px 28px 0;
+      padding: 18px 24px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(147,51,234,0.10), rgba(14,165,233,0.08));
+      border: 1px solid rgba(147,51,234,0.2);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .anchor-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .anchor-text {
+      font-size: 12.5px;
+      color: #d1d5db;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+    .anchor-text strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* ════ FOOTER ════ */
+    .footer {
+      padding: 22px 36px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: lowercase;
+      background: linear-gradient(90deg, #f97316, #e83d8c, #9333ea, #0ea5e9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-cta {
+      font-size: 10px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    .footer-cta strong {
+      color: #e83d8c;
+      font-weight: 700;
+    }
+    .footer-tag {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #374151;
+    }
+
+    /* Glow bottom */
+    .bottom-glow {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #f97316, #e83d8c, #9333ea, #0ea5e9, transparent);
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Topo -->
+  <div class="top-bar">
+    <div class="logo">inconnect</div>
+    <div class="ms-pill">🤝 Parceiro Microsoft</div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="eyebrow">Ecossistema de IA Microsoft</div>
+    <h1 class="hero-title">
+      Qual ferramenta de IA<br>
+      <span class="grad">é a certa para você?</span>
+    </h1>
+    <p class="hero-sub">3 plataformas diferentes. 3 momentos de maturidade digital. Entenda em qual a sua empresa se encaixa.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Produtos -->
+  <div class="products">
+
+    <!-- Produto 1 -->
+    <div class="prod prod-1">
+      <div class="prod-strip"></div>
+      <div class="prod-inner">
+        <div class="prod-icon">🤖</div>
+        <div class="prod-num">Nível 01</div>
+        <div class="prod-name">Microsoft 365 Copilot</div>
+        <div class="prod-tagline">Comece aqui — IA no dia a dia</div>
+        <div class="prod-label">Ideal se você…</div>
+        <ul class="prod-list">
+          <li>Já usa M365 e quer <strong>ganhar tempo agora</strong></li>
+          <li>Precisa de ajuda em <strong>reuniões, e-mails e docs</strong></li>
+          <li>Quer automação <strong>sem programar nada</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Produto 2 -->
+    <div class="prod prod-2">
+      <div class="prod-strip"></div>
+      <div class="prod-inner">
+        <div class="prod-icon">🎛️</div>
+        <div class="prod-num">Nível 02</div>
+        <div class="prod-name">Copilot Studio</div>
+        <div class="prod-tagline">Crie seus próprios agentes</div>
+        <div class="prod-label">Ideal se você…</div>
+        <ul class="prod-list">
+          <li>Quer um <strong>chatbot ou agente</strong> para clientes/equipes</li>
+          <li>Tem processos que precisam de <strong>IA personalizada</strong></li>
+          <li>Quer publicar Copilot <strong>externamente</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Produto 3 -->
+    <div class="prod prod-3">
+      <div class="prod-strip"></div>
+      <div class="prod-inner">
+        <div class="prod-icon">⚡</div>
+        <div class="prod-num">Nível 03</div>
+        <div class="prod-name">Azure AI Foundry</div>
+        <div class="prod-tagline">IA em escala total com controle</div>
+        <div class="prod-label">Ideal se você…</div>
+        <ul class="prod-list">
+          <li>Tem time de dev e <strong>dados proprietários</strong></li>
+          <li>Precisa de <strong>segurança enterprise</strong> total</li>
+          <li>Quer integrar IA em <strong>sistemas próprios</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /products -->
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">70%</div>
+      <div class="stat-label">dos usuários relatam mais produtividade*</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2h</div>
+      <div class="stat-label">economizadas por semana por usuário*</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">77%</div>
+      <div class="stat-label">das Fortune 500 já usam M365 Copilot*</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">14min</div>
+      <div class="stat-label">economizados por reunião com resumos*</div>
+    </div>
+  </div>
+
+  <!-- Âncora -->
+  <div class="anchor">
+    <div class="anchor-icon">💡</div>
+    <div class="anchor-text">
+      <strong>A Inconnect é especialista em conduzir essa jornada.</strong> Da escolha da ferramenta certa até a adoção real pelo time — com treinamento, implementação e suporte contínuo.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-logo">inconnect</div>
+    <div class="footer-cta">Fale com um especialista → <strong>inconnect.com.br</strong></div>
+    <div class="footer-tag">#Microsoft365 #IA #Copilot</div>
+  </div>
+
+  <div class="bottom-glow"></div>
+
+</div>
+
+
+</body></html>
