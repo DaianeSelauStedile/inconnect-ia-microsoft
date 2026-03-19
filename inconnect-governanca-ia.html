@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Governança de IA · Inconnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #07080f; --card: #0e1017; --border: rgba(255,255,255,0.07);
+      --text: #e8eaf2; --muted: #6b7280; --soft: #9ca3af;
+      --oa: #f97316; --ob: #e83d8c; --oc: #9333ea; --od: #0ea5e9;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 0 0 80px; }
+    body::before { content: ''; position: fixed; top: -200px; left: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(147,51,234,0.09) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+    body::after { content: ''; position: fixed; bottom: -150px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+
+    /* ── SENHA OVERLAY ── */
+    .pwd-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(7,8,15,0.97);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(12px);
+    }
+    .pwd-overlay.hidden { display: none; }
+    .pwd-box {
+      width: 360px; padding: 40px 36px;
+      background: #0e1017; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .pwd-logo { font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: lowercase;
+      background: linear-gradient(90deg, var(--oa), var(--ob), var(--oc), var(--od));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 6px; }
+    .pwd-lock { font-size: 36px; margin: 18px 0 10px; }
+    .pwd-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .pwd-sub { font-size: 11px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .pwd-input {
+      width: 100%; padding: 12px 16px; border-radius: 10px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-size: 14px; font-family: 'Inter', sans-serif;
+      outline: none; text-align: center; letter-spacing: 2px;
+      margin-bottom: 12px; transition: border-color 0.2s;
+    }
+    .pwd-input:focus { border-color: var(--oc); }
+    .pwd-input.error { border-color: #ef4444; animation: shake 0.3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .pwd-btn {
+      width: 100%; padding: 12px; border-radius: 10px; border: none; cursor: pointer;
+      background: linear-gradient(90deg, var(--oc), var(--od));
+      color: #fff; font-size: 13px; font-weight: 700; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px; transition: opacity 0.2s;
+    }
+    .pwd-btn:hover { opacity: 0.9; }
+    .pwd-error { font-size: 11px; color: #fca5a5; margin-top: 10px; min-height: 16px; }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,8,15,0.9); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: lowercase;
+      background: linear-gradient(90deg, var(--oa), var(--ob), var(--oc), var(--od));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .back-btn {
+      font-size: 11px; font-weight: 600; color: var(--muted); text-decoration: none;
+      padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border);
+      transition: border-color 0.2s; display: flex; align-items: center; gap: 6px;
+    }
+    .back-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .header-badge { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #a78bfa; background: rgba(147,51,234,0.1); border: 1px solid rgba(147,51,234,0.2);
+      padding: 4px 12px; border-radius: 20px; }
+
+    /* ── HERO ── */
+    .hero { position: relative; z-index: 1; padding: 52px 56px 40px; text-align: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--ob);
+      background: rgba(232,61,140,0.08); border: 1px solid rgba(232,61,140,0.2);
+      padding: 5px 16px; border-radius: 20px; margin-bottom: 20px; }
+    .hero-title { font-size: 44px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; color: #fff; margin-bottom: 14px; }
+    .hero-title .g { background: linear-gradient(90deg, var(--oa) 0%, var(--ob) 35%, var(--oc) 68%, var(--od) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 14px; color: var(--muted); max-width: 580px; margin: 0 auto; line-height: 1.65; }
+
+    /* ── GRAD LINE ── */
+    .grad-line { height: 2px; margin: 0 56px 48px;
+      background: linear-gradient(90deg, transparent, var(--oa), var(--ob), var(--oc), var(--od), transparent);
+      opacity: 0.4; border-radius: 2px; }
+
+    /* ── CENTRAL CONCEPT ── */
+    .central { position: relative; z-index: 1; margin: 0 56px 40px; }
+    .central-card {
+      border-radius: 16px; padding: 28px 36px;
+      background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(14,165,233,0.10));
+      border: 1px solid rgba(147,51,234,0.25);
+      display: flex; align-items: center; gap: 24px; text-align: left;
+    }
+    .central-icon { font-size: 48px; flex-shrink: 0; }
+    .central-label { font-size: 9px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: #a78bfa; margin-bottom: 6px; }
+    .central-title { font-size: 22px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .central-desc { font-size: 13px; color: var(--soft); line-height: 1.65; }
+
+    /* ── GRID ── */
+    .grid-section { position: relative; z-index: 1; padding: 0 56px; }
+    .section-label {
+      font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before { content: ''; display: block; width: 28px; height: 2px; border-radius: 2px; background: currentColor; }
+    .sl-policy   { color: #a78bfa; }
+    .sl-data     { color: #34d399; }
+    .sl-trust    { color: #fb923c; }
+    .sl-ops      { color: #60a5fa; }
+
+    .concepts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; }
+    .concepts-grid-2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
+
+    .concept-card {
+      border-radius: 12px; background: var(--card);
+      border: 1px solid var(--border); overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .concept-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+    .cc-strip { height: 3px; }
+    /* Policy strip colors */
+    .s-purple .cc-strip { background: linear-gradient(90deg, #9333ea, #a855f7); }
+    .s-pink   .cc-strip { background: linear-gradient(90deg, #e83d8c, #f472b6); }
+    .s-indigo .cc-strip { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+    /* Data strip colors */
+    .s-green  .cc-strip { background: linear-gradient(90deg, #16a34a, #34d399); }
+    .s-teal   .cc-strip { background: linear-gradient(90deg, #0d9488, #2dd4bf); }
+    /* Trust strip colors */
+    .s-orange .cc-strip { background: linear-gradient(90deg, #f97316, #fb923c); }
+    .s-amber  .cc-strip { background: linear-gradient(90deg, #d97706, #fbbf24); }
+    /* Ops strip colors */
+    .s-blue   .cc-strip { background: linear-gradient(90deg, #1d4ed8, #60a5fa); }
+    .s-cyan   .cc-strip { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+    .s-red    .cc-strip { background: linear-gradient(90deg, #dc2626, #f87171); }
+
+    .cc-inner { padding: 16px 16px 18px; }
+    .cc-num { font-size: 10px; font-weight: 900; margin-bottom: 4px; opacity: 0.5; }
+    .s-purple .cc-num { color: #a78bfa; }
+    .s-pink   .cc-num { color: #f472b6; }
+    .s-indigo .cc-num { color: #818cf8; }
+    .s-green  .cc-num { color: #34d399; }
+    .s-teal   .cc-num { color: #2dd4bf; }
+    .s-orange .cc-num { color: #fb923c; }
+    .s-amber  .cc-num { color: #fbbf24; }
+    .s-blue   .cc-num { color: #60a5fa; }
+    .s-cyan   .cc-num { color: #22d3ee; }
+    .s-red    .cc-num { color: #f87171; }
+
+    .cc-title { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+    .cc-desc { font-size: 11px; color: var(--soft); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      position: relative; z-index: 1; margin: 20px 56px 0;
+      padding: 20px 28px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(147,51,234,0.08), rgba(14,165,233,0.06));
+      border: 1px solid rgba(147,51,234,0.18);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pf-logo { font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: lowercase;
+      background: linear-gradient(90deg, var(--oa), var(--ob), var(--oc), var(--od));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .pf-sub { font-size: 9px; color: var(--muted); letter-spacing: 1px; margin-top: 3px; }
+    .pf-note { font-size: 9px; color: rgba(107,114,128,0.5); font-style: italic; }
+  </style>
+</head>
+<body>
+
+<!-- ── SENHA ── -->
+<div class="pwd-overlay" id="pwdOverlay">
+  <div class="pwd-box">
+    <div class="pwd-logo">inconnect</div>
+    <div class="pwd-lock">🔒</div>
+    <div class="pwd-title">Conteúdo Restrito</div>
+    <div class="pwd-sub">Este material é de uso interno da Inconnect.<br>Digite a senha para continuar.</div>
+    <input class="pwd-input" type="password" id="pwdInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')checkPwd()"/>
+    <button class="pwd-btn" onclick="checkPwd()">Entrar →</button>
+    <div class="pwd-error" id="pwdError"></div>
+  </div>
+</div>
+<script>
+  (function(){
+    if(sessionStorage.getItem('inconnect_auth')==='ok'){
+      document.getElementById('pwdOverlay').classList.add('hidden');
+    }
+  })();
+  function checkPwd(){
+    var v=document.getElementById('pwdInput').value;
+    if(v.toLowerCase()==='inconnect'){
+      sessionStorage.setItem('inconnect_auth','ok');
+      document.getElementById('pwdOverlay').classList.add('hidden');
+    } else {
+      var inp=document.getElementById('pwdInput');
+      var err=document.getElementById('pwdError');
+      inp.classList.add('error');
+      err.textContent='Senha incorreta. Tente novamente.';
+      setTimeout(function(){inp.classList.remove('error');},400);
+      inp.value=''; inp.focus();
+    }
+  }
+</script>
+
+<!-- ── HEADER ── -->
+<header class="header">
+  <div class="logo">inconnect</div>
+  <div class="header-badge">🛡️ AI Governance</div>
+  <a class="back-btn" href="index.html">← Voltar</a>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">Fundamentos de IA Responsável</div>
+  <h1 class="hero-title">15 Conceitos de<br><span class="g">AI Governance & Trust</span></h1>
+  <p class="hero-sub">As bases essenciais para adotar IA de forma ética, segura e em conformidade com padrões regulatórios e de negócio.</p>
+</section>
+
+<div class="grad-line"></div>
+
+<!-- ── CENTRAL ── -->
+<div class="central">
+  <div class="central-card">
+    <div class="central-icon">🏛️</div>
+    <div>
+      <div class="central-label">O Conceito Central</div>
+      <div class="central-title">AI Governance</div>
+      <div class="central-desc">Governança de IA é o conjunto de políticas, processos, controles e responsabilidades que garantem que sistemas de IA sejam desenvolvidos e operados de forma <strong style="color:#fff">segura, ética, transparente e em conformidade</strong> com regulamentos — protegendo a organização e os usuários dos riscos que a IA pode gerar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── GRUPO 1: Política & Responsabilidade ── -->
+<div class="grid-section">
+  <div class="section-label sl-policy">Política & Responsabilidade</div>
+  <div class="concepts-grid">
+
+    <div class="concept-card s-purple">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">01</div>
+        <div class="cc-title">Policy Framework</div>
+        <div class="cc-desc">Regras definidas sobre como e onde a IA pode ser usada dentro da organização — quem pode usar, para quê e com quais limites.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-pink">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">02</div>
+        <div class="cc-title">Accountability</div>
+        <div class="cc-desc">Responsabilidade clara sobre decisões e resultados gerados por IA — quem responde quando algo dá errado e como isso é tratado.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-indigo">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">03</div>
+        <div class="cc-title">Risk Classification</div>
+        <div class="cc-desc">Classificação dos sistemas de IA pelo nível de risco e impacto potencial — determina quais controles e validações cada sistema exige.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-purple">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">04</div>
+        <div class="cc-title">Human Oversight</div>
+        <div class="cc-desc">Garantia de que humanos podem revisar, corrigir ou sobrepor decisões da IA quando necessário — especialmente em contextos de alto impacto.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-pink">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">11</div>
+        <div class="cc-title">Compliance Alignment</div>
+        <div class="cc-desc">Garantia de que os sistemas de IA seguem padrões legais e éticos aplicáveis — LGPD, GDPR, regulações setoriais e normas internas.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-indigo">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">14</div>
+        <div class="cc-title">Access & Permission Control</div>
+        <div class="cc-desc">Controle granular de quem pode acessar e operar sistemas de IA — baseado em papéis, contexto e necessidade de negócio.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── GRUPO 2: Dados & Transparência ── -->
+<div class="grid-section">
+  <div class="section-label sl-data">Dados & Transparência</div>
+  <div class="concepts-grid">
+
+    <div class="concept-card s-green">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">05</div>
+        <div class="cc-title">Data Governance</div>
+        <div class="cc-desc">Gestão da qualidade, segurança e conformidade dos dados que alimentam os modelos de IA — dados ruins geram decisões ruins.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-teal">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">06</div>
+        <div class="cc-title">Model Transparency</div>
+        <div class="cc-desc">Capacidade de entender como um sistema de IA gera seus outputs — quais dados usa, qual lógica aplica e quais limitações tem.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-green">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">10</div>
+        <div class="cc-title">Explainability</div>
+        <div class="cc-desc">Capacidade de fornecer raciocínio claro e compreensível por trás das recomendações da IA — essencial para setores regulados.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── GRUPO 3: Qualidade & Confiança ── -->
+<div class="grid-section">
+  <div class="section-label sl-trust">Qualidade & Confiança</div>
+  <div class="concepts-grid">
+
+    <div class="concept-card s-orange">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">07</div>
+        <div class="cc-title">Bias Monitoring</div>
+        <div class="cc-desc">Identificação e redução de vieses nos modelos de IA — prevenindo resultados discriminatórios ou injustos para grupos específicos.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-amber">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">09</div>
+        <div class="cc-title">Auditability</div>
+        <div class="cc-desc">Rastreabilidade completa das decisões do modelo, atualizações e mudanças de sistema — fundamental para conformidade e investigações.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-orange">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">15</div>
+        <div class="cc-title">Trust Metrics</div>
+        <div class="cc-desc">Métricas para medir confiabilidade, equidade e segurança dos outputs de IA — KPIs que provam que o sistema está funcionando como esperado.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── GRUPO 4: Segurança & Operações ── -->
+<div class="grid-section">
+  <div class="section-label sl-ops">Segurança & Operações</div>
+  <div class="concepts-grid-2">
+
+    <div class="concept-card s-blue">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">08</div>
+        <div class="cc-title">Security Controls</div>
+        <div class="cc-desc">Proteção dos modelos e dados de IA contra uso indevido, vazamentos, ataques adversariais e acessos não autorizados.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-cyan">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">12</div>
+        <div class="cc-title">Monitoring & Drift Detection</div>
+        <div class="cc-desc">Acompanhamento contínuo do desempenho do modelo e detecção de desvios — quando o modelo começa a errar mais, algo mudou.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-red">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">13</div>
+        <div class="cc-title">Incident Response</div>
+        <div class="cc-desc">Processos para gerenciar falhas, outputs prejudiciais ou comportamentos inesperados da IA — quem aciona, como contém e como corrige.</div>
+      </div>
+    </div>
+
+    <div class="concept-card s-blue">
+      <div class="cc-strip"></div>
+      <div class="cc-inner">
+        <div class="cc-num">🌐</div>
+        <div class="cc-title">Por que isso importa</div>
+        <div class="cc-desc">Com a regulação de IA avançando globalmente (EU AI Act, LGPD, ISO 42001), ter Governança de IA não é diferencial — é requisito de mercado.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="page-footer">
+  <div>
+    <div class="pf-logo">inconnect</div>
+    <div class="pf-sub">Transformação Digital Humanizada · Parceiro Microsoft</div>
+  </div>
+  <div class="pf-note">Material de uso interno · Inconnect Comercial</div>
+</footer>
+
+</body>
+</html>
