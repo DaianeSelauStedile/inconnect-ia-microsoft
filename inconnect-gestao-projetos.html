@@ -1,141 +1,463 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gestão de Projetos no Ecossistema Microsoft</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-</head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestão de Projetos · Inconnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f9fc;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 48px 24px 64px;
+    }
+
+    /* ── SENHA OVERLAY ── */
+    .pwd-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(248,249,252,0.98);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(12px);
+    }
+    .pwd-overlay.hidden { display: none; }
+    .pwd-box {
+      width: 360px; padding: 40px 36px;
+      background: #ffffff; border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .pwd-logo { font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: lowercase;
+      background: linear-gradient(90deg, #f97316, #e83d8c, #9333ea, #0ea5e9);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 6px; }
+    .pwd-lock { font-size: 36px; margin: 18px 0 10px; }
+    .pwd-title { font-size: 16px; font-weight: 800; color: #1a1a2e; margin-bottom: 6px; }
+    .pwd-sub { font-size: 11px; color: #6b7280; margin-bottom: 24px; line-height: 1.5; }
+    .pwd-input {
+      width: 100%; padding: 12px 16px; border-radius: 10px;
+      background: #f1f3f8; border: 1px solid rgba(0,0,0,0.12);
+      color: #1a1a2e; font-size: 14px; font-family: 'Inter', sans-serif;
+      outline: none; text-align: center; letter-spacing: 2px;
+      margin-bottom: 12px; transition: border-color 0.2s;
+    }
+    .pwd-input:focus { border-color: #9333ea; }
+    .pwd-input.error { border-color: #ef4444; animation: shake 0.3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .pwd-btn {
+      width: 100%; padding: 12px; border-radius: 10px; border: none; cursor: pointer;
+      background: linear-gradient(90deg, #9333ea, #0ea5e9);
+      color: #fff; font-size: 13px; font-weight: 700; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px; transition: opacity 0.2s;
+    }
+    .pwd-btn:hover { opacity: 0.9; }
+    .pwd-error { font-size: 11px; color: #ef4444; margin-top: 10px; min-height: 16px; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: 800px; margin: 0 auto; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; color: #0078d4;
+      text-decoration: none; letter-spacing: 0.5px;
+      margin-bottom: 36px; opacity: 0.8; transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 1; }
+
+    /* ── HEADER ── */
+    .page-header { margin-bottom: 48px; }
+    .logo { font-size: 14px; font-weight: 800; letter-spacing: 4px; text-transform: lowercase;
+      background: linear-gradient(90deg, #f97316, #e83d8c, #9333ea, #0ea5e9);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 24px; }
+    .header-strip { height: 3px; background: linear-gradient(90deg, #0ea5e9, #0078d4); border-radius: 2px; margin-bottom: 24px; }
+    .eyebrow { font-size: 9px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: #0078d4; margin-bottom: 10px; }
+    .page-title { font-size: 28px; font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; color: #1a1a2e; margin-bottom: 12px; }
+    .page-title .g { background: linear-gradient(90deg, #0ea5e9, #0078d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-subtitle { font-size: 13px; color: #4b5563; line-height: 1.7; max-width: 620px; }
+
+    /* ── SEÇÕES ── */
+    .section { margin-bottom: 32px; }
+
+    .section-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .section-icon { font-size: 22px; }
+
+    .section-header-text {}
+    .section-tag { font-size: 8px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+    .section-title { font-size: 16px; font-weight: 800; color: #1a1a2e; }
+
+    /* Cores por card */
+    .card-red .section-header { background: #fff5f5; }
+    .card-red .section-tag { color: #dc2626; }
+    .card-red .section-header { border-left: 3px solid #dc2626; }
+
+    .card-blue .section-header { background: #eff8ff; }
+    .card-blue .section-tag { color: #0078d4; }
+    .card-blue .section-header { border-left: 3px solid #0078d4; }
+
+    .card-purple .section-header { background: #f5f0ff; }
+    .card-purple .section-tag { color: #7c3aed; }
+    .card-purple .section-header { border-left: 3px solid #7c3aed; }
+
+    .card-orange .section-header { background: #fff7ed; }
+    .card-orange .section-tag { color: #ea580c; }
+    .card-orange .section-header { border-left: 3px solid #ea580c; }
+
+    .section-body { padding: 20px 24px; }
+
+    .desc { font-size: 13px; color: #374151; line-height: 1.7; margin-bottom: 16px; }
+
+    /* ── STATUS BADGE ── */
+    .status-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .badge {
+      font-size: 10px; font-weight: 700; padding: 5px 12px; border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+    .badge-red { background: #fee2e2; color: #b91c1c; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-purple { background: #ede9fe; color: #6d28d9; }
+    .badge-orange { background: #ffedd5; color: #c2410c; }
+    .badge-gray { background: #f3f4f6; color: #374151; }
+
+    /* ── LISTAS ── */
+    .list-group { margin-bottom: 16px; }
+    .list-label { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #9ca3af; margin-bottom: 8px; }
+    ul.items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    ul.items li {
+      font-size: 12px; color: #374151; line-height: 1.5;
+      padding-left: 16px; position: relative;
+    }
+    ul.items li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #d1d5db;
+    }
+    .card-blue ul.items li::before { background: #0078d4; }
+    .card-purple ul.items li::before { background: #7c3aed; }
+    .card-red ul.items li::before { background: #dc2626; }
+    .card-orange ul.items li::before { background: #ea580c; }
+
+    strong { font-weight: 700; }
+
+    /* ── GRID 2 COLS ── */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .mini-card { background: #f8f9fc; border-radius: 10px; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.06); }
+    .mini-card .mini-label { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; color: #9ca3af; }
+    .mini-card ul.items li { font-size: 11px; }
+
+    /* ── TIMELINE ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item { display: flex; gap: 16px; padding-bottom: 20px; position: relative; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 32px; }
+    .tl-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+    .tl-dot-red { background: #dc2626; }
+    .tl-dot-orange { background: #ea580c; }
+    .tl-dot-green { background: #16a34a; }
+    .tl-line { width: 2px; flex: 1; background: #e5e7eb; margin-top: 4px; }
+    .tl-item:last-child .tl-line { display: none; }
+    .tl-right {}
+    .tl-date { font-size: 10px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 3px; }
+    .tl-text { font-size: 12px; color: #374151; line-height: 1.5; }
+
+    /* ── DIVIDER ── */
+    .grad-line { height: 1px; margin: 40px 0 24px; background: linear-gradient(90deg, transparent, #0ea5e9, #0078d4, transparent); opacity: 0.4; }
+    .footer-note { text-align: center; font-size: 10px; color: #9ca3af; }
+
+    @media (max-width: 600px) {
+      .grid2 { grid-template-columns: 1fr; }
+      .page-title { font-size: 22px; }
+    }
+  </style>
+</head>
 <body>
 
-  <main class="content">
+<!-- ── SENHA ── -->
+<div class="pwd-overlay" id="pwdOverlay">
+  <div class="pwd-box">
+    <div class="pwd-logo">inconnect</div>
+    <div class="pwd-lock">🔒</div>
+    <div class="pwd-title">Acesso Restrito</div>
+    <div class="pwd-sub">Este portal é de uso interno da Inconnect.<br>Digite a senha para acessar os materiais.</div>
+    <input class="pwd-input" type="password" id="pwdInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')checkPwd()"/>
+    <button class="pwd-btn" onclick="checkPwd()">Entrar →</button>
+    <div class="pwd-error" id="pwdError"></div>
+  </div>
+</div>
+<script>
+  (function(){
+    if(sessionStorage.getItem('inconnect_auth')==='ok'){
+      document.getElementById('pwdOverlay').classList.add('hidden');
+    }
+  })();
+  function checkPwd(){
+    var v=document.getElementById('pwdInput').value;
+    if(v.toLowerCase()==='inconnect'){
+      sessionStorage.setItem('inconnect_auth','ok');
+      document.getElementById('pwdOverlay').classList.add('hidden');
+    } else {
+      var inp=document.getElementById('pwdInput');
+      var err=document.getElementById('pwdError');
+      inp.classList.add('error');
+      err.textContent='Senha incorreta. Tente novamente.';
+      setTimeout(function(){inp.classList.remove('error');},400);
+      inp.value=''; inp.focus();
+    }
+  }
+</script>
 
-    <h1>Gestão de Projetos no Ecossistema Microsoft</h1>
+<!-- ── CONTEÚDO ── -->
+<div class="wrap">
 
-    <p>
-      A Microsoft vem consolidando sua estratégia de <strong>gestão de trabalho, projetos e portfólio</strong>
-      dentro do <strong>Microsoft Planner</strong>, alinhando essas soluções ao Microsoft 365,
-      à Power Platform e ao uso de Inteligência Artificial (Copilot).
+  <a class="back-link" href="index.html">← Voltar ao Hub</a>
+
+  <div class="page-header">
+    <div class="logo">inconnect</div>
+    <div class="header-strip"></div>
+    <div class="eyebrow">PMO · Gestão de Projetos · Microsoft 365</div>
+    <h1 class="page-title">Project, Planner e <span class="g">Planner Premium</span></h1>
+    <p class="page-subtitle">
+      A Microsoft está consolidando sua estratégia de gestão de trabalho, projetos e portfólio
+      dentro do Microsoft Planner — alinhado ao Microsoft 365, à Power Platform e ao uso de
+      Inteligência Artificial (Copilot). Entenda o que muda, o que fica e o que chega.
     </p>
+  </div>
 
-    <p>
-      Esse movimento inclui a <strong>descontinuação do Project Online</strong> e o posicionamento
-      do <strong>Planner Premium</strong> como sua principal alternativa moderna.
-    </p>
 
-    <hr>
+  <!-- CARD 1: PROJECT ONLINE -->
+  <div class="section">
+    <div class="section-card card-red">
+      <div class="section-header">
+        <div class="section-icon">🗂️</div>
+        <div class="section-header-text">
+          <div class="section-tag">Em Descontinuação</div>
+          <div class="section-title">Project Online (Project Web App)</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="desc">
+          Por muitos anos a principal solução Microsoft para <strong>gestão estruturada de projetos e PMO</strong>,
+          baseada em uma arquitetura legada (Project Web App e SharePoint). Robusta, mas complexa — e com os dias contados na nuvem.
+        </p>
 
-    <h2>Project (Project Online) – Em processo de descontinuação</h2>
+        <div class="status-badges">
+          <span class="badge badge-red">⚠ Fim das novas vendas: out/2025</span>
+          <span class="badge badge-red">🔴 Encerramento do serviço: set/2026</span>
+          <span class="badge badge-green">✓ Project Desktop: não descontinuado</span>
+        </div>
 
-    <p>
-      O <strong>Project Online</strong> foi, por muitos anos, a principal solução Microsoft para
-      <strong>gestão estruturada de projetos e PMO</strong>, baseada em uma arquitetura legada
-      (Project Web App e SharePoint).
-    </p>
+        <div class="list-group">
+          <div class="list-label">Principais capacidades</div>
+          <ul class="items">
+            <li>Cronogramas detalhados com <strong>Gantt avançado</strong></li>
+            <li><strong>Dependências completas</strong> entre tarefas (FS, SS, FF, SF, com lead e lag)</li>
+            <li><strong>Linhas de base</strong> e análise de caminho crítico</li>
+            <li><strong>Gestão centralizada de recursos</strong> (capacity planning)</li>
+            <li>Gestão de <strong>programas e portfólios</strong></li>
+            <li>Controle de <strong>custos, orçamento e financeiro</strong></li>
+            <li>Campos personalizados e workflows rígidos de governança</li>
+            <li>Relatórios corporativos via OData e PWA</li>
+          </ul>
+        </div>
 
-    <h3>Principais capacidades</h3>
-    <ul>
-      <li>Cronogramas detalhados com <strong>Gantt avançado</strong></li>
-      <li><strong>Dependências completas</strong> entre tarefas (FS, SS, FF, SF, com lead e lag)</li>
-      <li><strong>Linhas de base</strong> e análise de caminho crítico</li>
-      <li><strong>Gestão centralizada de recursos</strong> (capacity planning)</li>
-      <li>Gestão de <strong>programas e portfólios</strong></li>
-      <li>Controle de <strong>custos, orçamento e financeiro</strong></li>
-      <li>Campos personalizados e workflows rígidos de governança</li>
-      <li>Relatórios corporativos baseados em PWA e OData</li>
-    </ul>
+        <div class="list-group">
+          <div class="list-label">O que se perde com a descontinuação</div>
+          <ul class="items">
+            <li>Estruturas de PPM tradicional altamente centralizado</li>
+            <li>Workflows nativos do Project Web App</li>
+            <li>Relatórios legados baseados em OData/PWA</li>
+            <li>Modelos customizados fora da Power Platform</li>
+          </ul>
+        </div>
 
-    <h3>Status do produto</h3>
-    <ul>
-      <li>Fim das novas vendas: <strong>outubro de 2025</strong></li>
-      <li>Encerramento definitivo do serviço: <strong>30 de setembro de 2026</strong></li>
-      <li>Após essa data, ambientes e dados deixam de estar acessíveis</li>
-    </ul>
+        <div class="list-label" style="margin-top:16px; margin-bottom:10px;">Linha do tempo</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot tl-dot-orange"></div><div class="tl-line"></div></div>
+            <div class="tl-right"><div class="tl-date" style="color:#ea580c;">Outubro de 2025</div><div class="tl-text">Fim das novas vendas do Project Online</div></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot tl-dot-red"></div><div class="tl-line"></div></div>
+            <div class="tl-right"><div class="tl-date" style="color:#dc2626;">30 de Setembro de 2026</div><div class="tl-text">Encerramento definitivo — ambientes e dados deixam de estar acessíveis</div></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot tl-dot-green"></div></div>
+            <div class="tl-right"><div class="tl-date" style="color:#16a34a;">Agora</div><div class="tl-text">Momento ideal para planejar a migração para o Planner Premium</div></div>
+          </div>
+        </div>
 
-    <p>
-      <em>Observação:</em> o <strong>Microsoft Project Desktop (Professional ou Standard)</strong>
-      não está sendo descontinuado.
-    </p>
+      </div>
+    </div>
+  </div>
 
-    <hr>
 
-    <h2>Microsoft Planner (Básico)</h2>
+  <!-- CARD 2: PLANNER BÁSICO -->
+  <div class="section">
+    <div class="section-card card-blue">
+      <div class="section-header">
+        <div class="section-icon">✅</div>
+        <div class="section-header-text">
+          <div class="section-tag">Incluído no Microsoft 365</div>
+          <div class="section-title">Microsoft Planner (Básico)</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="desc">
+          Solução de <strong>gestão de tarefas e trabalho em equipe</strong> incluída nas licenças Microsoft 365
+          (Business, E3 e E5). Foco em simplicidade, colaboração e adoção rápida — ideal para equipes que
+          precisam organizar o trabalho do dia a dia sem complexidade.
+        </p>
 
-    <p>
-      O <strong>Microsoft Planner</strong> é a solução de <strong>gestão de tarefas e trabalho em equipe</strong>
-      incluída nas licenças Microsoft 365 (Business, E3 e E5), com foco em simplicidade,
-      colaboração e adoção rápida.
-    </p>
+        <div class="status-badges">
+          <span class="badge badge-blue">✓ Incluso no M365 Business / E3 / E5</span>
+          <span class="badge badge-gray">Sem custo adicional</span>
+        </div>
 
-    <h3>Principais capacidades</h3>
-    <ul>
-      <li>Gestão de tarefas em <strong>Quadro (Kanban), Lista e Gráficos</strong></li>
-      <li>Atribuição de tarefas, checklists, comentários e anexos</li>
-      <li>Organização por buckets e rótulos</li>
-      <li>Visão “Atribuído a mim”</li>
-      <li>Integração nativa com <strong>Microsoft Teams</strong> e <strong>Microsoft To Do</strong></li>
-    </ul>
+        <div class="grid2">
+          <div class="mini-card">
+            <div class="mini-label">O que tem</div>
+            <ul class="items">
+              <li>Quadro Kanban, Lista e Gráficos</li>
+              <li>Atribuição de tarefas, checklists e anexos</li>
+              <li>Organização por buckets e rótulos</li>
+              <li>Visão "Atribuído a mim"</li>
+              <li>Integração com Teams e Microsoft To Do</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <div class="mini-label">O que não tem</div>
+            <ul class="items">
+              <li>Gantt / Linha do tempo</li>
+              <li>Dependências entre tarefas</li>
+              <li>Linhas de base</li>
+              <li>Caminho crítico</li>
+              <li>Gestão de portfólio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <h3>Limitações</h3>
-    <ul>
-      <li>Não possui Gantt avançado</li>
-      <li>Não possui dependências entre tarefas</li>
-      <li>Não possui linhas de base, caminho crítico ou gestão de portfólio</li>
-    </ul>
 
-    <hr>
+  <!-- CARD 3: PLANNER PREMIUM -->
+  <div class="section">
+    <div class="section-card card-purple">
+      <div class="section-header">
+        <div class="section-icon">🚀</div>
+        <div class="section-header-text">
+          <div class="section-tag">Substituto Estratégico do Project Online</div>
+          <div class="section-title">Microsoft Planner Premium</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="desc">
+          A <strong>plataforma moderna da Microsoft para gestão de projetos</strong>, construída sobre
+          <strong>Dataverse e Power Platform</strong>. Combina a simplicidade do Planner com o poder
+          do Project Online — e ainda integra Copilot e IA nativamente.
+        </p>
 
-    <h2>Microsoft Planner Premium</h2>
+        <div class="status-badges">
+          <span class="badge badge-purple">⭐ Recomendado pela Microsoft</span>
+          <span class="badge badge-purple">Licença separada ou via M365 Copilot</span>
+        </div>
 
-    <p>
-      O <strong>Planner Premium</strong> é a <strong>plataforma moderna da Microsoft para gestão de projetos</strong>,
-      construída sobre <strong>Dataverse e Power Platform</strong>, e considerada o
-      <strong>substituto estratégico do Project Online</strong>.
-    </p>
+        <div class="list-group">
+          <div class="list-label">Tudo do Planner básico, mais</div>
+          <ul class="items">
+            <li><strong>Linha do tempo (Gantt)</strong></li>
+            <li><strong>Dependências entre tarefas</strong> com lead e lag</li>
+            <li><strong>Caminho crítico</strong></li>
+            <li><strong>Linhas de base</strong></li>
+            <li>Metas (Goals) e Sprints (Agile)</li>
+            <li>Histórico de tarefas</li>
+            <li>Campos personalizados e coloração condicional</li>
+            <li>Visualização de carga de trabalho por pessoa</li>
+            <li>Integração nativa com <strong>Power BI, Power Automate e Dataverse</strong></li>
+            <li>Uso de <strong>Microsoft 365 Copilot</strong> e Project Manager Agent</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <h3>Principais capacidades</h3>
-    <ul>
-      <li>Tudo do Planner básico, mais:</li>
-      <li><strong>Linha do tempo (Gantt)</strong></li>
-      <li><strong>Dependências entre tarefas</strong>, incluindo lead e lag</li>
-      <li><strong>Caminho crítico</strong></li>
-      <li><strong>Linhas de base</strong></li>
-      <li>Metas (Goals) e Sprints (Agile)</li>
-      <li>Histórico de tarefas</li>
-      <li>Campos personalizados e coloração condicional</li>
-      <li>Visualização de carga de trabalho por pessoa</li>
-      <li>Integração nativa com Power BI, Power Automate e Dataverse</li>
-      <li>Uso de <strong>Microsoft 365 Copilot</strong> e Project Manager Agent</li>
-    </ul>
 
-    <hr>
+  <!-- CARD 4: EVOLUÇÃO / PMO INCONNECT -->
+  <div class="section">
+    <div class="section-card card-orange">
+      <div class="section-header">
+        <div class="section-icon">🏗️</div>
+        <div class="section-header-text">
+          <div class="section-tag">PMO Inconnect · Visão Estratégica</div>
+          <div class="section-title">A Evolução Proposta pela Microsoft</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="desc">
+          A simples substituição de ferramenta, <strong>sem redesenhar o modelo de gestão</strong>,
+          pode gerar perda de capacidades tradicionais de PMO. A Microsoft propõe uma evolução
+          baseada em plataforma — onde cada pilar tem uma ferramenta dedicada, integrada e com IA.
+        </p>
 
-    <h2>O que muda com a extinção do Project Online</h2>
+        <div class="grid2">
+          <div class="mini-card">
+            <div class="mini-label">Governança e Estrutura</div>
+            <ul class="items">
+              <li>Baseada em <strong>Power Platform</strong></li>
+              <li>Fluxos e aprovações via <strong>Power Automate</strong></li>
+              <li>Apps de PMO no <strong>Power Apps</strong></li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <div class="mini-label">Análise e Decisão</div>
+            <ul class="items">
+              <li>Dashboards em tempo real via <strong>Power BI</strong></li>
+              <li>Dados de projeto via <strong>Dataverse</strong></li>
+              <li>Visão de portfólio integrada</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <div class="mini-label">Inteligência Artificial</div>
+            <ul class="items">
+              <li><strong>Copilot</strong> como copiloto contínuo do PM</li>
+              <li><strong>Project Manager Agent</strong> no Planner Premium</li>
+              <li>Geração de planos, resumos e alertas</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <div class="mini-label">Oportunidade Comercial</div>
+            <ul class="items">
+              <li>Clientes com Project Online precisam migrar até set/2026</li>
+              <li>Janela aberta para consultoria de PMO + licenciamento</li>
+              <li>Proposta de valor: migração + adoção + Copilot</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <p>
-      A simples substituição de ferramenta, sem redesenhar o modelo de gestão,
-      pode gerar perda de capacidades tradicionais de PMO.
-    </p>
 
-    <h3>Possíveis perdas</h3>
-    <ul>
-      <li>Estruturas prontas de <strong>PPM tradicional altamente centralizado</strong></li>
-      <li>Workflows rígidos nativos do Project Web App</li>
-      <li>Relatórios legados baseados em OData/PWA</li>
-      <li>Modelos antigos fortemente customizados fora da Power Platform</li>
-    </ul>
+  <div class="grad-line"></div>
+  <div class="footer-note">inconnect.com.br · Material produzido com suporte de IA · 🔒 Uso interno</div>
 
-    <h3>Evolução proposta pela Microsoft</h3>
-    <ul>
-      <li>Governança baseada em <strong>Power Platform</strong></li>
-      <li>Análise e decisão com <strong>Power BI</strong></li>
-      <li>Automação com <strong>Power Automate</strong></li>
-      <li><strong>IA (Copilot)</strong> como apoio contínuo à gestão de projetos</li>
-    </ul>
-
-  </main>
-
+</div>
 </body>
 </html>
-``
